@@ -10,7 +10,9 @@ const routes: Array<RouteConfig> = [
       showSystemBar: false,
       showStatusBar: false,
       showActionBar: false,
-      showNavigationBar: false
+      showNavigationBar: false,
+
+      requireAuthentication: false,
     }
   },
   {
@@ -21,7 +23,9 @@ const routes: Array<RouteConfig> = [
       showSystemBar: false,
       showStatusBar: false,
       showActionBar: false,
-      showNavigationBar: false
+      showNavigationBar: false,
+
+      requireAuthentication: false,
     }
   },
 ]

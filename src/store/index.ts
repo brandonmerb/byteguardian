@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 
 import notesStore from '@/modules/notes/store';
+import authStore from '@/modules/authentication/store';
 
 Vue.use(Vuex)
 
@@ -116,6 +117,7 @@ export default new Vuex.Store({
   actions: {
   },
   modules: {
-    notes: notesStore
+    notes: notesStore,
+    auth: authStore
   }
 })

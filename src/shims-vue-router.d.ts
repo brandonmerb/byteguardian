@@ -7,6 +7,8 @@ declare module 'vue-router' {
     showSystemBar?: boolean,
     showStatusBar?: boolean,
     showActionBar?: boolean,
-    showNavigationBar?: boolean
+    showNavigationBar?: boolean,
+
+    requireAuthentication?: boolean
   }
 }

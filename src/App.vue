@@ -23,7 +23,17 @@ export default Vue.extend({
     }
   },
   data: () => ({
+    darkTheme: true
   }),
+  watch: {
+    darkTheme (to) {
+      this.$vuetify.theme.dark = to;
+    }
+  },
+  beforeMount() {
+    // Make sure we have the proper theme
+    this.$vuetify.theme.dark = this.darkTheme;
+  }
 });
 </script>
 <style>
