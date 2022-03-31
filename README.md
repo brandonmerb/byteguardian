@@ -1,4 +1,4 @@
-# thevault
+# Byte Guardian
 
 ## Project setup
 ```

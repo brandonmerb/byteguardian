@@ -4,11 +4,22 @@ import router from './router'
 import store from './store'
 import vuetify from './plugins/vuetify'
 
+import BaseHttpService from './services/baseHttpService'
+import ToastService from './services/toastService'
+
 Vue.config.productionTip = false
+
+const toastService: ToastService = new ToastService();
+const httpService: BaseHttpService = new BaseHttpService('https://localhost:8080', toastService);
+
 
 new Vue({
   router,
   store,
   vuetify,
-  render: h => h(App)
+  render: h => h(App),
+  provide: {
+    'httpService': httpService,
+    'toastService': toastService
+  }
 }).$mount('#app')

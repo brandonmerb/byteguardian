@@ -2,7 +2,7 @@
   <v-container>
     <v-row>
       <v-col cols="12" class="justify-center">
-        <login-embed />
+        <login-embed show-register/>
       </v-col>
     </v-row>
   </v-container>

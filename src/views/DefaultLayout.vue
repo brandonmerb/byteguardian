@@ -14,6 +14,7 @@
       transition="dialog-bottom-transition">
       <settings />
     </v-dialog>
+    <toast-system />
   </v-app>
 </template>
 <script lang="ts">
@@ -23,6 +24,7 @@ import NavigationBar from '@/components/NavigationBar.vue';
 import SystemBar from '@/components/SystemBar.vue'
 import StatusBar from '@/components/StatusBar.vue'
 import Settings from '@/views/Settings.vue';
+import ToastSystem from '@/components/ToastSystem.vue';
 
 export default Vue.extend({
   components: {
@@ -30,7 +32,8 @@ export default Vue.extend({
     NavigationBar,
     Settings,
     SystemBar,
-    StatusBar
+    StatusBar,
+    ToastSystem
   },
   computed: {
     isSettingsOpen: {
@@ -57,7 +60,4 @@ export default Vue.extend({
 })
 </script>
 <style scoped>
-.host-app .v-main {
-  padding-right: 56px !important;
-}
 </style>
