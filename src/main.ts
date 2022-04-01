@@ -9,8 +9,8 @@ import ToastService from './services/toastService'
 
 Vue.config.productionTip = false
 
-const toastService: ToastService = new ToastService();
-const httpService: BaseHttpService = new BaseHttpService('https://localhost:8080', toastService);
+const toastService: ToastService = new ToastService().setStore(store);
+const httpService: BaseHttpService = new BaseHttpService('https://localhost:8080', toastService).setStore(store);
 
 
 new Vue({

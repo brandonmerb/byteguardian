@@ -1,4 +1,4 @@
-import Vue from 'vue'
+import Vue, { Component } from 'vue'
 import Vuex from 'vuex'
 
 import notesStore from '@/modules/notes/store';
@@ -33,7 +33,16 @@ interface NavigationItem {
   route: any
 }
 
-interface MainApplicationState {
+export interface TabItem {
+  icon: string,
+  text: string,
+  component: Component,
+
+  itemId: string,
+  itemType: 'credential' | 'note',
+}
+
+export interface MainApplicationState {
   menu: Menu;
   leftNavigation: Navigation;
 
@@ -48,6 +57,9 @@ interface MainApplicationState {
  
   settingsOpen: boolean;
   desktopMode: boolean;
+
+  tabs: TabItem[];
+  currentEditorTab: number;
 }
 
 export {
@@ -79,7 +91,10 @@ export default new Vuex.Store({
     systemBarVisible: true,
     statusBarVisible: true,
 
-    settingsOpen: false
+    settingsOpen: false,
+
+    tabs: [],
+    currentEditorTab: 0,
   },
   mutations: {
     setNavigationBarVisible(state: MainApplicationState, val: boolean) {
@@ -112,9 +127,36 @@ export default new Vuex.Store({
     },
     setStatusBarVisible(state: MainApplicationState, val: boolean) {
       state.statusBarVisible = val;
+    },
+
+    addTabItem(state: MainApplicationState, val: TabItem) {
+      state.tabs.push(val);
+    },
+    removeTabItem(state: MainApplicationState, val: TabItem) {
+      const indexOf = state.tabs.indexOf(val);
+      state.tabs.splice(indexOf, 1);
+    },
+    closeAllTabs(state: MainApplicationState) {
+      state.tabs = [];
+    },
+    closeOtherTabs(state: MainApplicationState, val: TabItem) {
+      state.tabs = [val];
+    },
+
+    setCurrentTab(state: MainApplicationState, val: TabItem | number) {
+      let index = val;
+      if (typeof val !== 'number'){
+        index = state.tabs.indexOf(val);
+      }
+      state.currentEditorTab = index as number;
     }
   },
   actions: {
+  },
+  getters: {
+    currentTab(state): TabItem {
+      return state.tabs[state.currentEditorTab];
+    }
   },
   modules: {
     notes: notesStore,

@@ -3,15 +3,15 @@
     <div :style="{'max-width': maxWidth == null ? 'auto' : `${maxWidth}px`}">
       <v-stepper v-model="step" elevation="0" :outlined="border">
         <v-stepper-header>
-          <v-stepper-step :completed="step > 1" step="1">
+          <v-stepper-step :complete="step > 1" step="1">
             Basic Info
           </v-stepper-step>
           <v-divider />
-          <v-stepper-step :completed="step > 2" step="2">
+          <v-stepper-step :complete="step > 2" step="2">
             Contact Info
           </v-stepper-step>
           <v-divider />
-          <v-stepper-step :completed="step > 3" step="3">
+          <v-stepper-step :complete="step > 3" step="3">
             Finish
           </v-stepper-step>
         </v-stepper-header>
@@ -237,8 +237,10 @@ export default Vue.extend({
   },
   data() {
     return {
-      step: 1,
+      step: 1 as any,
       requireAddress: false,
+
+      verificationCode: '' as any,
     }
   },
   methods: {
@@ -248,6 +250,15 @@ export default Vue.extend({
     goBack () {
       this.step = this.step - 1;
     },
+  },
+  mounted () {
+    if (this.$route.query.code != null) {
+      this.verificationCode = this.$route.query.code;
+    }
+    if (this.$route.query.step != null) {
+      this.step = this.$route.query.step;
+      this.step = parseInt(this.step);
+    }
   },
   props: {
     border: {
