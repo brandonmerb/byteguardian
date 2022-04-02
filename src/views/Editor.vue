@@ -1,19 +1,30 @@
 <template>
-  <div>
-    <v-tabs v-show="tabs.length > 0" v-model="currentTab">
-      <v-tab v-for="tab in tabs" :key="tab.itemId">
-        {{tab.text}}
-        <v-icon @click="closeTab(tab)">
-          mdi-close
+  <v-sheet class="tabs">
+    <div class="tab-bar" @drop="dragEnd($event)" @dragover.prevent @dragenter="dragEnter($event)" v-show="tabs.length> 0">
+      <span
+          :class="{'tab-title': true, 'tab-title-active': tab === currentTab}"
+          v-for="tab in tabs"
+          :key="tab.itemId"
+          @click.self="tabClick(tab)"
+          draggable
+          @dragstart="startDrag($event, tab)"
+        >
+        <v-icon small fab class="tab-icon" @click.self="tabClick(tab)">
+          mdi-note
         </v-icon>
-      </v-tab>
-    </v-tabs>
-    <v-tabs-items v-model="currentTab">
-      <v-tab-item v-for="(tab, index) in tabs" :key="index">
-        <component :is="tab.component" :custom-model="tab" />
-      </v-tab-item>
-    </v-tabs-items>
-  </div>
+        {{tab.text}}
+        <v-icon small fab class="tab-close" @click="tabClose(tab)">
+          mdi-close-circle
+        </v-icon>
+      </span>
+    </div>
+    <div class="tab-content">
+      <div :is="currentTab.component" v-if="currentTab != null" :custom-model="currentTab" />
+      <div v-else class="tab-content-placeholder">
+        Nothing is currently open. Please select something!
+      </div>
+    </div>
+  </v-sheet>
 </template>
 
 <script lang="ts">
@@ -30,14 +41,8 @@ export default Vue.extend({
     NoteForm
   },
   computed: {
-    currentTab: {
-      get () {
-        return this.$store.state.currentEditorTab;
-      },
-      set (v) {
-        console.log(v)
-        this.$store.commit('setCurrentTab', v);
-      }
+    currentTab () {
+      return this.$store.getters.currentTab;
     },
     tabs () {
       return this.$store.state.tabs;
@@ -46,6 +51,27 @@ export default Vue.extend({
   methods: {
     closeTab(tab: TabItem) {
       this.$store.commit('removeTabItem', tab);
+    },
+
+    tabClick(tab: TabItem) {
+      this.$store.commit('setCurrentTab', tab);
+    },
+    tabClose(tab: TabItem) {
+      this.$store.commit('removeTabItem', tab);
+    },
+
+    startDrag(e: DragEvent, tab: TabItem) {
+      console.log(e)
+      console.log(tab)
+    },
+
+    dragEnd(e: DragEvent){
+      console.log('end');
+    },
+
+    dragEnter(e: DragEvent) {
+      console.log('enter');
+      console.log(e);
     }
   },
 
@@ -74,5 +100,56 @@ export default Vue.extend({
   display: flex;
   align-self: stretch;
   justify-content: center;
+}
+.tabs {
+  display: flex;
+  flex-grow: 1;
+  flex-shrink: 0;
+  flex-direction: column;
+}
+.tab-bar {
+  height: 40px;
+  flex-shrink: 1;
+  display: flex;
+
+  font-size: 14px;
+
+  background-color: var(--v-primary-base);
+}
+.tab-content {
+  flex-grow: 1;
+  display: flex;
+
+  justify-content: center;
+}
+
+.tab-icon {
+  margin-right: 5px;
+}
+.tab-close {
+  margin-left: 5px;
+}
+
+.tab-title {
+  justify-items: center;
+  align-items: center;
+  display: flex;
+
+  padding-left: 5px;
+  padding-right: 5px;
+
+  margin-right: 1px;
+
+  background-color: var(--v-primary-darken1);
+}
+.tab-title:hover {
+  cursor: pointer;
+}
+.tab-title-active {
+  background-color: var(--v-primary-darken2);
+}
+
+.tab-content-placeholder {
+  align-self: center;
 }
 </style>

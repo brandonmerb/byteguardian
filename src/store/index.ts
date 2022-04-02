@@ -94,7 +94,7 @@ export default new Vuex.Store({
     settingsOpen: false,
 
     tabs: [],
-    currentEditorTab: 0,
+    currentEditorTab: 1,
   },
   mutations: {
     setNavigationBarVisible(state: MainApplicationState, val: boolean) {

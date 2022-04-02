@@ -40,4 +40,7 @@ export default Vue.extend({
 html, body {
   overflow: auto;
 }
+.v-main__wrap {
+  display: flex;
+}
 </style>
