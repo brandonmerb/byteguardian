@@ -1,15 +1,6 @@
 <template>
-  <v-sheet class="pa-2 d-flex grow">
-    <v-form class="d-flex grow">
-      <v-row>
-        <v-col cols="12">
-          {{customModel.itemId == null ? 'creating' : 'editing'}}
-        </v-col>
-        <v-col cols="12">
-          <markdown-editor />
-        </v-col>
-      </v-row>
-    </v-form>
+  <v-sheet class="d-flex grow">
+    <markdown-editor />
   </v-sheet>
 </template>
 <script lang="ts">
