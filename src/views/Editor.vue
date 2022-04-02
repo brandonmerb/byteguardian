@@ -18,7 +18,7 @@
         </v-icon>
       </span>
     </div>
-    <div class="tab-content">
+    <div class="tab-content" :style="{'margin-top': currentTab == null ? '0px' : '40px'}">
       <div :is="currentTab.component" v-if="currentTab != null" :custom-model="currentTab" />
       <div v-else class="tab-content-placeholder">
         Nothing is currently open. Please select something!
@@ -115,6 +115,10 @@ export default Vue.extend({
   font-size: 14px;
 
   background-color: var(--v-primary-base);
+
+  position: fixed;
+  width: 100%;
+  z-index: 1;
 }
 .tab-content {
   flex-grow: 1;

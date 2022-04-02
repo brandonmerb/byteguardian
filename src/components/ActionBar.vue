@@ -1,11 +1,11 @@
 <template>
-  <v-navigation-drawer v-bind="$attrs" :mini-variant="!isOpen">
+  <v-navigation-drawer v-bind="$attrs" :mini-variant="!isOpen" width="600">
     <v-list>
-      <v-list-item v-for="navItem in nav" :key="navItem.text" :to="navItem.route">
+      <v-list-item v-for="action in actionBarItems" :key="action.name">
         <v-list-item-icon>
-          <v-icon>{{navItem.icon}}</v-icon>
+          <v-icon>{{action.icon}}</v-icon>
         </v-list-item-icon>
-        <v-list-item-title> {{navItem.text}} </v-list-item-title>
+        <v-list-item-title> {{action.name}} </v-list-item-title>
       </v-list-item>
 
       <v-spacer />
@@ -31,8 +31,13 @@ export default Vue.extend({
       if (this.isOpen) return 'mdi-arrow-right-thick'
       else return 'mdi-arrow-left-thick'
     },
-    nav () {
-      return this.$store.state.leftNavigation.items;
+
+    actionBarItems () {
+      if (this.$store.getters.currentActionBarItems != null) {
+        return this.$store.getters.currentActionBarItems.items;
+      } else {
+        return []
+      }
     }
   },
   methods: {

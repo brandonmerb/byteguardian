@@ -30,6 +30,26 @@
             </v-col>
           </v-row>
         </v-card-text>
+        <v-card-actions>
+          <v-row>
+            <v-col cols="6">
+              <v-btn>
+                <v-icon>
+                  mdi-close
+                </v-icon>
+                Cancel
+              </v-btn>
+            </v-col>
+            <v-col class="d-flex justify-end">
+              <v-btn color="primary">
+                <v-icon>
+                  mdi-check
+                </v-icon>
+                Save credential
+              </v-btn>
+            </v-col>
+          </v-row>
+        </v-card-actions>
       </v-card>
     </v-form>
   </v-sheet>

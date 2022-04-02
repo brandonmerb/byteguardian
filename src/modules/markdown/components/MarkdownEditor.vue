@@ -45,8 +45,7 @@
         </v-select>
       </div>-->
     </div>
-    <div class="d-flex grow pa-2" contenteditable>
-      Replace this
+    <div class="pa-2 grow markdown-text" contenteditable="">
     </div>
   </div>
 
@@ -75,5 +74,10 @@ export default Vue.extend({
 }
 .markdown-option-group .v-select {
   max-width: 300px;
+}
+
+.markdown-text {
+  min-height: 200px;
+  border: 1px solid var(--v-secondary-base);
 }
 </style>

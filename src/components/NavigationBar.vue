@@ -18,7 +18,7 @@
       </v-list-item>
       <v-list-item @click="toggleSettings">
         <v-list-item-icon>
-          <v-icon>mdi-cog</v-icon>
+          <v-icon>mdi-cog-outline</v-icon>
         </v-list-item-icon>
         <v-list-item-title> Settings </v-list-item-title>
       </v-list-item>

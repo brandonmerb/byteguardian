@@ -4,6 +4,9 @@ import Vuex from 'vuex'
 import notesStore from '@/modules/notes/store';
 import authStore from '@/modules/authentication/store';
 
+import actionBarOptions from '@/modules/richactions/configs/credentialActionBar';
+import {ActionBarControlList} from '@/modules/richactions/models/actionBarModel';
+
 Vue.use(Vuex)
 
 /* 
@@ -60,6 +63,8 @@ export interface MainApplicationState {
 
   tabs: TabItem[];
   currentEditorTab: number;
+
+  actionBarOptions: ActionBarControlList[];
 }
 
 export {
@@ -77,7 +82,18 @@ export default new Vuex.Store({
     },
 
     leftNavigation: {
-      items: [],
+      items: [
+        {
+          icon: 'mdi-home-outline',
+          text: 'Home', 
+          route: '/'
+        },
+        {
+          icon: 'mdi-filter-plus-outline',
+          text: 'Filter',
+          route: '/custom-filter'
+        }
+      ],
     },
 
     desktopMode: true,
@@ -95,6 +111,8 @@ export default new Vuex.Store({
 
     tabs: [],
     currentEditorTab: 0,
+
+    actionBarOptions: [actionBarOptions]
   },
   mutations: {
     setNavigationBarVisible(state: MainApplicationState, val: boolean) {
@@ -144,11 +162,16 @@ export default new Vuex.Store({
     },
 
     setCurrentTab(state: MainApplicationState, val: TabItem | number) {
+      // Fetch the tab
       let index = val;
       if (typeof val !== 'number'){
+        // We may be passed the object directly. If so, fetch it's index
         index = state.tabs.indexOf(val);
       }
+      // Set the currentEditorTab index to be the value of indexOf
       state.currentEditorTab = index as number;
+
+      // Process the current tab's action bar items
     }
   },
   actions: {
@@ -156,6 +179,9 @@ export default new Vuex.Store({
   getters: {
     currentTab(state): TabItem {
       return state.tabs[state.currentEditorTab];
+    },
+    currentActionBarItems(state): ActionBarControlList | undefined {
+      return state.actionBarOptions.find((x) => x.typeName === state.tabs[state.currentEditorTab]?.itemType);
     }
   },
   modules: {
