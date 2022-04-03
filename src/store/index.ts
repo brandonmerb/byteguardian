@@ -6,6 +6,7 @@ import authStore from '@/modules/authentication/store';
 
 import actionBarOptions from '@/modules/richactions/configs/credentialActionBar';
 import {ActionBarControlList} from '@/modules/richactions/models/actionBarModel';
+import noteBarOptions from '@/modules/richactions/configs/noteActionBar';
 
 Vue.use(Vuex)
 
@@ -112,7 +113,7 @@ export default new Vuex.Store({
     tabs: [],
     currentEditorTab: 0,
 
-    actionBarOptions: [actionBarOptions]
+    actionBarOptions: [actionBarOptions, noteBarOptions]
   },
   mutations: {
     setNavigationBarVisible(state: MainApplicationState, val: boolean) {

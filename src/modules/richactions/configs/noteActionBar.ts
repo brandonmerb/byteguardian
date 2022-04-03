@@ -1,7 +1,7 @@
-import { ActionBarControl, ActionBarControlList } from '../models/actionBarModel';
+import { ActionBarControlList } from '../models/actionBarModel';
 
-const credActions: ActionBarControlList = {
-  typeName: 'credential',
+const noteActions: ActionBarControlList = {
+  typeName: 'note',
   items: [
     {
       name: 'Info',
@@ -17,6 +17,11 @@ const credActions: ActionBarControlList = {
       name: 'Sharing',
       icon: 'mdi-share',
       action: 'share',
+    },
+    {
+      name: 'Attachments',
+      icon: 'mdi-paperclip',
+      action: 'attach',
     },
     {
       name: 'History',
@@ -36,4 +41,4 @@ const credActions: ActionBarControlList = {
   ]
 }
 
-export default credActions;
+export default noteActions;
